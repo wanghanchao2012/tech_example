@@ -1,0 +1,18 @@
+spring:
+  redis:
+    host: 192.168.30.95
+    port: 6379
+    database: 1
+    password: "wO2f@j0q16loYa5d"
+    timeout: 3000
+  session:
+    store-type: redis
+session:
+  timeout: 3600
+server:
+  port: 8001
+
+logging:
+  level:
+    root: debug
+
