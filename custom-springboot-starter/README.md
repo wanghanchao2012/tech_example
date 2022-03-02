@@ -1,3 +1,3 @@
 springboot的入口是标示@SpringBootApplication的类，该类下的注解@EnableAutoConfiguration会自动装配各个"starter"模块，每个starter模块通常是一个jar包，入口文件是META-INF/spring.facties
-该文件有一个key：org.springframework.boot.autoconfigure.EnableAutoConfiguration 这个键是加载各模块的统一配置入口，springboot所有的模块实体装载都来源该key下的value，
+该文件有一个key：org.springframework.boot.autoconfigure.EnableAutoConfiguration 这个键是加载各模块的统一配置入口，springboot多数主要的类的实例装载都来源该key下的value，
 他会为你自动装配bean到spring容器中，各个bean所需要的配置属性可在项目中配置（也就是各种配置约定）然后即可使用该实例
