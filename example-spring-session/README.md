@@ -1,0 +1,3 @@
+sessionID在一个客户端请求过来时，判断用户cookie中是否携带了JSESSIONID
+如果cookie中不存在该SessionID则由org.apache.catalina.valves.CrawlerSessionManagerValve.getClientIdentifier
+该方法创建一个sessionID，在返回给用户时写到cookie中，后续用再次请求时cookie携带该sessionID来建立session会话，过期时间等由tomcat容器来管理
