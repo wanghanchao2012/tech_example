@@ -26,7 +26,7 @@ public class SessionShareController {
 
         HttpSession session = httpRequest.getSession(true);
         session.setAttribute("user", "123456");
-        System.out.println("--hello world2022222222--");
+        System.out.println("你好，这是我的分支代码!");
         return String.valueOf(port);
     }
 
