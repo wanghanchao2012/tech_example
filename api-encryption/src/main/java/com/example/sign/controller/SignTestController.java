@@ -1,14 +1,13 @@
 package com.example.sign.controller;
 
+import cn.hutool.core.map.MapUtil;
 import com.example.sign.config.response.ResponseResult;
 import com.example.sign.config.sign.Signature;
 import com.example.sign.entity.User;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.sign.util.ApiSignUtils;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * @author pdai
@@ -25,4 +24,17 @@ public class SignTestController {
         return ResponseResult.success(String.join(",", id, client, user.toString()));
     }
 
+    @GetMapping("test/api")
+    public ResponseResult<Map<String, Object>> myController() {
+        String key = ApiSignUtils.DEFAULT_SECRET_KEY;
+        Map<String, Object> signatureMap = ApiSignUtils.getSignature(MapUtil.builder()
+                .put("name", "zhangsan")
+                .put("age", 12).build(), key);
+        signatureMap.entrySet().forEach(record -> {
+            System.out.println("key:" + record.getKey() + ",value:" + record.getValue());
+        });
+        boolean b = ApiSignUtils.checkSignature(signatureMap, key);
+        System.out.println(b);
+        return ResponseResult.success(signatureMap);
+    }
 }
