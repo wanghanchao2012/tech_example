@@ -9,6 +9,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 public class ExampleSpringSessionApplication {
 
     public static void main(String[] args) {
+        System.out.println("Hello Application!!!");
         SpringApplication.run(ExampleSpringSessionApplication.class, args);
     }
 
