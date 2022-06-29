@@ -27,6 +27,9 @@ public class SessionShareController {
         HttpSession session = httpRequest.getSession(true);
         session.setAttribute("user", "123456");
         System.out.println("分支合并到master测试");
+        System.out.println("111111");
+        System.out.println("222222");
+
         return String.valueOf(port);
     }
 
