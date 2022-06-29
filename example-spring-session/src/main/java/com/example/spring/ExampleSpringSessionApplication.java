@@ -10,6 +10,7 @@ public class ExampleSpringSessionApplication {
 
     public static void main(String[] args) {
         System.out.println("Hello Application!!!");
+        System.out.println("Hello 我是分支20220602!!!");
         SpringApplication.run(ExampleSpringSessionApplication.class, args);
     }
 
