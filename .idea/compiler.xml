@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="api-encryption" />
+        <module name="example-spring-session" />
+        <module name="java-basic-example" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="api-encryption" target="1.8" />
+      <module name="example-spring-session" target="1.8" />
+      <module name="java-basic-example" target="1.8" />
+      <module name="tech_example" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-encryption" options="-parameters" />
+      <module name="example-spring-session" options="-parameters" />
+      <module name="java-basic-example" options="-parameters" />
+    </option>
+  </component>
+</project>
