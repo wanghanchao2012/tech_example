@@ -1,0 +1,5 @@
+scp:
+  ip: 10.240.23.112
+  port: 22
+  userName: root
+  password: zhengda@1
