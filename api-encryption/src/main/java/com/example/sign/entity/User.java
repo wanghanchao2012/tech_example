@@ -1,8 +1,5 @@
 package com.example.sign.entity;
 
-/**
- * @author pdai
- */
 public class User {
 
     /**

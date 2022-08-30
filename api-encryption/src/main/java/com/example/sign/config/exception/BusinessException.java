@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * business exception, besides normal exception.
  *
- * @author pdai
  */
 @Slf4j
 public class BusinessException extends RuntimeException {

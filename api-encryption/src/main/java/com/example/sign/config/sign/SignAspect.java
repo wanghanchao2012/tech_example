@@ -1,38 +1,30 @@
 package com.example.sign.config.sign;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
-import java.util.Objects;
-
-import javax.servlet.http.HttpServletRequest;
-
 import cn.hutool.core.text.CharSequenceUtil;
+import cn.hutool.json.JSONUtil;
 import com.example.sign.config.exception.BusinessException;
+import com.example.sign.util.Constants;
 import com.example.sign.util.SignUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.context.request.ServletWebRequest;
-import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 
-/**
- * @author pdai
- */
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 @Aspect
 @Component
 public class SignAspect {
 
-    /**
-     * SIGN_HEADER.
-     */
-    private static final String SIGN_HEADER = "X-SIGN";
 
     /**
      * pointcut.
@@ -48,44 +40,50 @@ public class SignAspect {
     @Before("verifySignPointCut()")
     public void verify() {
         HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
-        String sign = request.getHeader(SIGN_HEADER);
+        String sign = request.getHeader(Constants.SIGN_HEADER);
 
         // must have sign in header
         if (CharSequenceUtil.isBlank(sign)) {
-            throw new BusinessException("no signature in header: " + SIGN_HEADER);
+            throw new BusinessException("no signature in header: " + Constants.SIGN_HEADER);
         }
 
         // check signature
         try {
-            String generatedSign = generatedSignature(request);
+            long time = System.currentTimeMillis() - Constants.EXPIRE_TIME;
+            // @RequestBody
+            String bodyParam = null;
+            String timeStamp = null;
+            Map<String, String[]> requestParameterMap = null;
+            if (request instanceof ContentCachingRequestWrapper) {
+                bodyParam = new String(((ContentCachingRequestWrapper) request).getContentAsByteArray(), StandardCharsets.UTF_8);
+            }
+            // @RequestParam
+            requestParameterMap = request.getParameterMap();
+            Map<String, Object> map = JSONUtil.toBean(bodyParam, Map.class);
+            if (map.containsKey(Constants.SIGN_TIME_STAMP)) {
+                timeStamp = map.get(Constants.SIGN_TIME_STAMP).toString();
+            }
+            if (time > Long.parseLong(timeStamp)) {
+                throw new BusinessException("invalid signature timeStamp expired");
+            }
+            String generatedSign = generatedSignature(bodyParam, requestParameterMap);
             if (!sign.equals(generatedSign)) {
                 throw new BusinessException("invalid signature");
             }
         } catch (Throwable throwable) {
-            throw new BusinessException("invalid signature");
+            if (StringUtils.isNotBlank(throwable.getMessage())) {
+                throw new BusinessException(throwable.getMessage());
+            } else {
+                throw new BusinessException("invalid signature");
+            }
         }
     }
 
-    private String generatedSignature(HttpServletRequest request) throws IOException {
-        // @RequestBody
-        String bodyParam = null;
-        if (request instanceof ContentCachingRequestWrapper) {
-            bodyParam = new String(((ContentCachingRequestWrapper) request).getContentAsByteArray(), StandardCharsets.UTF_8);
-        }
-
-        // @RequestParam
-        Map<String, String[]> requestParameterMap = request.getParameterMap();
-
-        // @PathVariable
-        String[] paths = null;
-        ServletWebRequest webRequest = new ServletWebRequest(request, null);
-        Map<String, String> uriTemplateVars = (Map<String, String>) webRequest.getAttribute(
-                HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE, RequestAttributes.SCOPE_REQUEST);
-        if (!CollectionUtils.isEmpty(uriTemplateVars)) {
-            paths = uriTemplateVars.values().toArray(new String[0]);
-        }
-
-        return SignUtil.sign(bodyParam, requestParameterMap, paths);
+    private String generatedSignature(String bodyParam, Map<String, String[]> requestParameterMap) throws IOException {
+        Map<String, String[]> collect = requestParameterMap.entrySet().stream()
+                .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
+        return SignUtil.sign(bodyParam, collect);
     }
+
 
 }
