@@ -21,8 +21,10 @@ import java.util.*;
 public class SignTestController {
 
     @Signature
-    @PostMapping("test/my")
-    public ResponseResult<String> myController(@RequestParam String client
+    @PostMapping("test/signValid")
+    public ResponseResult<String> myController(@RequestParam String client,
+                                               @RequestParam String a,
+                                               @RequestParam String b
             , @RequestBody User user) {
         return ResponseResult.success(String.join(",", client, user.toString()));
     }
