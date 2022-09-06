@@ -5,6 +5,7 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.example.shiro.beans.Permissions;
 import com.example.shiro.beans.Role;
 import com.example.shiro.beans.User;
+import com.example.shiro.service.AuthService;
 import com.example.shiro.service.LoginService;
 import com.example.shiro.util.JWTUtil;
 import org.apache.shiro.authc.AuthenticationException;
@@ -24,6 +25,8 @@ import java.util.Objects;
 public class UserRealm extends AuthorizingRealm {
     @Autowired
     LoginService loginService;
+    @Autowired
+    AuthService authService;
 
     @Override
     public boolean supports(AuthenticationToken token) {
@@ -64,8 +67,8 @@ public class UserRealm extends AuthorizingRealm {
         String token = (String) auth.getCredentials();
         // 解密获得username，用于和数据库进行对比
         String username = JWTUtil.getUsername(token);
-        String loginTime = JWTUtil.getLoginTime(token);
-        
+        //String loginTime = JWTUtil.getLoginTime(token);
+
         if (username == null) {
             throw new AuthenticationException("token invalid");
         }
@@ -83,6 +86,13 @@ public class UserRealm extends AuthorizingRealm {
                 throw new AuthenticationException("username or password error");
             }
         }
+        if (authService.tokenIsExpired(username)) {
+            throw new AuthenticationException("current token expired!");
+        }
+        if (!Objects.equals(authService.getTokenFromCache(username), token)) {
+            throw new AuthenticationException("token mismatch or token expired!");
+        }
+        authService.refreshRequestTs(username);
         return new SimpleAuthenticationInfo(token, token, getName());
     }
 }

@@ -2,25 +2,23 @@ package com.example.shiro.util;
 
 
 import com.google.common.collect.HashMultimap;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.*;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
  * @description: Redis工具类（String类型）
- * @author: 大脑补丁
- * @create: 2022-06-23 16:02
  */
+@Component
 public class RedisUtils {
 
+    @Autowired
     private StringRedisTemplate redisTemplate;
-
-    public RedisUtils(StringRedisTemplate redisTemplate) {
-        this.redisTemplate = redisTemplate;
-    }
 
     /**
      * 写入缓存
@@ -79,8 +77,9 @@ public class RedisUtils {
      */
     public void removePattern(final String pattern) {
         Set<String> keys = redisTemplate.keys(pattern);
-        if (keys != null && keys.size() > 0)
+        if (keys != null && keys.size() > 0) {
             redisTemplate.delete(keys);
+        }
     }
 
     /**

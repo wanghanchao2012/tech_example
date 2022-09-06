@@ -1,4 +1,4 @@
-package com.example.shiro.beans;
+package com.example.shiro.beans.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
