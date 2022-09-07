@@ -10,7 +10,10 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,9 +36,11 @@ public class AspectLogAop {
         Object[] args = jp.getArgs();
         MethodSignature signature = (MethodSignature) jp.getSignature();
         Method method = signature.getMethod();
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
         String[] parameterNames = signature.getParameterNames();
         Map<String, Object> paramNameValueMap = new HashMap<>();
-        paramNameValueMap.put("method", method.toString());
+        paramNameValueMap.put("method", request.getMethod());
         for (int i = 0; i < parameterNames.length; i++) {
             paramNameValueMap.put(parameterNames[i], args[i]);
         }
