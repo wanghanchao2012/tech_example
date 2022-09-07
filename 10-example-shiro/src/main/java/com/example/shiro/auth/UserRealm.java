@@ -83,7 +83,7 @@ public class UserRealm extends AuthorizingRealm {
             if (verify instanceof TokenExpiredException) {
                 throw new AuthenticationException("token expired!");
             } else if (verify instanceof SignatureVerificationException) {
-                throw new AuthenticationException("username or password error");
+                throw new AuthenticationException("token validation error ");
             }
         }
         if (authService.tokenIsExpired(username)) {
