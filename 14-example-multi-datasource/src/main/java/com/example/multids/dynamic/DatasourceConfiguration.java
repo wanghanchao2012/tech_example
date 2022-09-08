@@ -60,7 +60,7 @@ public class DatasourceConfiguration {
         // 设置所有的数据源
         dataSource.setTargetDataSources(dataSourceMap);
         // 设置默认使用的数据源对象
-        dataSource.setDefaultTargetDataSource(dataSourceMap);
+        dataSource.setDefaultTargetDataSource(dataSourceMap.get("test"));
 
         return dataSource;
     }
@@ -77,4 +77,5 @@ public class DatasourceConfiguration {
                         .getResources("classpath*:mapper/*/*.xml"));
         return bean.getObject();
     }
+
 } 

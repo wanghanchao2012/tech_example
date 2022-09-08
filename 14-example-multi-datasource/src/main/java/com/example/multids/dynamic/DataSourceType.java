@@ -7,12 +7,13 @@ public class DataSourceType {
         if (dataBase == null) {
             throw new NullPointerException();
         }
-        System.out.println("[切换数据源到]:" + dataBase);
+        TYPE.set(dataBase);
+        System.out.println("switch ds to :" + dataBase);
     }
 
     public static String getDataBaseType() {
         String database = TYPE.get();
-        System.out.println("[当前数据源为]:" + database);
+        System.out.println("current ds is :" + database);
         return database;
     }
 
