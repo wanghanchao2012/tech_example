@@ -4,6 +4,7 @@ import com.alibaba.druid.pool.DruidDataSource;
 import lombok.AllArgsConstructor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,9 +26,11 @@ public class DatasourceConfiguration {
         /**
          * other database
          */
-        Map<String, Map<String, String>> sourceMap = dynamicDatasourceProperties.getDatasource();
+        Map<String, Map<String, String>> sourceMap = dynamicDatasourceProperties.getDruid();
+        DruidDataSource dataSourceDefault = dynamicDatasourceProperties.getPoolConfig();
         sourceMap.forEach((datasourceName, datasourceMaps) -> {
             DruidDataSource dataSource = new DruidDataSource();
+            BeanUtils.copyProperties(dataSourceDefault,dataSource);
             datasourceMaps.forEach((K, V) -> {
                 String setField = "set" + K.substring(0, 1).toUpperCase() + K.substring(1);
                 //转换yml文件中带有-符号的属性
