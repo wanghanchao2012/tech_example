@@ -14,9 +14,19 @@ public class ExampleInTest {
     /**
      * 当使用HashMap等散是，且需要将对象作为key来做get/put/equals等操作是必须要同时重写实体的equals和hashCode的
      * 比如get时需要用hashCode来得到hash，且需要用equals来对key来做比较
-     * 如单独使用对象时，不必须要同时重写equals和hashCode ，但是违反规范（所以还是建议同时重写）
+     * 如单独使用对象时，不必须要同时重写equals和hashCode ，但是违反Java规范（相等的对象都规定有相同的hashCode）所以还是建议同时重写
      * 当重写equals（不重写hashCode）时，两个equals对象相等，但此时hashCode却可能不想等，相反有同样的问题
-     *
+     * 
+     * 总结：
+     * 1、两个对象，用==比较比较的是地址，需采用equals方法（可根据需求重写）比较
+     *   Object类源码：
+     *   public boolean equals(Object obj) {
+     *         return (this == obj);
+     *     }
+     * 2，重写equals()方法就重写hashCode()方法。
+     * 3，一般相等的对象都规定有相同的hashCode。
+     * 4，String类重写了equals和hashCode方法，比较的是值。
+     * 5，重写hashcode方法为了将数据存入HashSet/HashMap/Hashtable（可以参考源码有助于理解）类时进行比较
      * @param args
      */
     public static void main(String[] args) {
