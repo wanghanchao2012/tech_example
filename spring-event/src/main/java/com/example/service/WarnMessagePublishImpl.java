@@ -1,4 +1,4 @@
-package com.example.service;
+package com.example.aop.service;
 
 import com.example.entity.WarnMessageInfo;
 import com.example.event.WarnMessagePublishEvent;

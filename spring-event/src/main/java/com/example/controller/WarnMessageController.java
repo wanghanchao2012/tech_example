@@ -1,8 +1,8 @@
-package com.example.controller;
+package com.example.aop.controller;
 
 import com.example.entity.BeanUtil;
 import com.example.entity.WarnMessageInfo;
-import com.example.service.WarnMessagePublishImpl;
+import com.example.aop.service.WarnMessagePublishImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
