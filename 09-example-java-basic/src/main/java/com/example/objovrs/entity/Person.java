@@ -1,11 +1,8 @@
-package com.example.override;
+package com.example.objovrs.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.junit.Test;
-
-import java.util.Arrays;
 
 @Data
 @AllArgsConstructor

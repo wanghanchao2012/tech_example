@@ -1,4 +1,4 @@
-package com.example.override;
+package com.example.objovrs.entity;
 
 import com.google.common.collect.ComparisonChain;
 import lombok.AllArgsConstructor;
@@ -14,13 +14,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ComparisonChainPerson implements Comparable<ComparisonChainPerson> {
+public class PersonOvrCompareTo implements Comparable<PersonOvrCompareTo> {
     private String lastName;
     private String firstName;
     private int zipCode;
 
     @Override
-    public int compareTo(ComparisonChainPerson that) {
+    public int compareTo(PersonOvrCompareTo that) {
         return ComparisonChain.start()
                 .compare(this.lastName, that.lastName)
                 .compare(this.firstName, that.firstName)

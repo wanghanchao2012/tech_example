@@ -1,5 +1,6 @@
-package com.example.override;
+package com.example.objovrs.entity;
 
+import com.google.common.base.MoreObjects;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class UserOvrHashCode {
     private String name;
     private int age;
     private String passport;
@@ -33,7 +34,7 @@ public class User {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        User user = (User) o;
+        UserOvrHashCode user = (UserOvrHashCode) o;
         return age == user.age &&
                 com.google.common.base.Objects.equal(name, user.name) &&
                 com.google.common.base.Objects.equal(passport, user.passport);
@@ -42,5 +43,14 @@ public class User {
     @Override
     public int hashCode() {
         return com.google.common.base.Objects.hashCode(name, age, passport);
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("name", name)
+                .add("age", age)
+                .add("passport", passport)
+                .toString();
     }
 }

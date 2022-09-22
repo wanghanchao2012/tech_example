@@ -8,21 +8,21 @@ import org.apache.commons.pool2.impl.GenericKeyedObjectPool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ConnectionTestFactory extends BaseKeyedPooledObjectFactory<String, ConnectionTest> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ConnectionTestFactory.class);
+public class MyConnectionFactory extends BaseKeyedPooledObjectFactory<String, MyConnection> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MyConnectionFactory.class);
 
     @Override
-    public ConnectionTest create(String key) throws Exception {
-        return new ConnectionTest(key);
+    public MyConnection create(String key) throws Exception {
+        return new MyConnection(key);
     }
 
     @Override
-    public PooledObject<ConnectionTest> wrap(ConnectionTest value) {
+    public PooledObject<MyConnection> wrap(MyConnection value) {
         return new DefaultPooledObject<>(value);
     }
 
     public static void main(String[] args) {
-        KeyedObjectPool<String, ConnectionTest> objectPool = new GenericKeyedObjectPool<>(new ConnectionTestFactory());
+        KeyedObjectPool<String, MyConnection> objectPool = new GenericKeyedObjectPool<>(new MyConnectionFactory());
         try {
             //添加对象到池，重复的不会重复入池            
             objectPool.addObject("1");
@@ -30,7 +30,7 @@ public class ConnectionTestFactory extends BaseKeyedPooledObjectFactory<String, 
             objectPool.addObject("3");
 
             // 获得对应key的对象            
-            ConnectionTest connectionTest1 = objectPool.borrowObject("1");
+            MyConnection connectionTest1 = objectPool.borrowObject("1");
             LOGGER.info("borrowObject = {}", connectionTest1);
 
             // 释放对象            

@@ -1,9 +1,9 @@
 package com.example.commons.pools;
 
-public class ConnectionTest {
+public class MyConnection {
     public String name;
 
-    public ConnectionTest(String name) {
+    public MyConnection(String name) {
         this.name = name;
     }
 }

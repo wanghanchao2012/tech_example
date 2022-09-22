@@ -1,4 +1,4 @@
-package com.example.override;
+package com.example.objovrs.entity;
 
 import com.google.common.base.MoreObjects;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserSimple {
+public class UserPrettyToString {
     private String name;
     private int age;
     private String passport;
