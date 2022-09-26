@@ -7,9 +7,9 @@
 		<artifactId>tech_example</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>16-example-spring-oauth2</artifactId>
+	<artifactId>16-example-memory-oauth2</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>16-example-spring-oauth2</name>
+	<name>16-example-memory-oauth2</name>
 	<description>Demo project for Spring Boot</description>
 	
 	<properties>
