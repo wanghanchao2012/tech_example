@@ -1,0 +1,22 @@
+spring:
+  redis:
+    host: 192.168.30.95
+    port: 6379
+    password: wO2f@j0q16loYa5d
+    data: 5
+    poolMaxActive: 8
+    poolMaxIdle: 8
+    poolMinIdle: ''
+    poolMaxWait: 3000
+  datasource:
+    jdbc-url: jdbc:mysql://localhost:3306/oauth?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT
+    username: root
+    password: 111111
+    driverClassName: com.mysql.cj.jdbc.Driver
+logging:
+  level:
+    org:
+      springframework:
+        web: debug
+        jdbc: debug
+
