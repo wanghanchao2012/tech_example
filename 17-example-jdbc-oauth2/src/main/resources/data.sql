@@ -4,7 +4,7 @@ INSERT INTO oauth.oauth_client_details (client_id,resource_ids,client_secret,`sc
 	 ('client_2','xmall-auth,xmall-product','$2a$10$zNDgAkXKu4xSeupcLlZsKuSpmU75MQDqODhieBZvTMdeNEKwaUoIi','read','client_credentials,refresh_token',NULL,NULL,NULL,NULL,NULL,NULL,'2022-09-27 03:08:30');
 	 
 	 
-/**defualt password **/
+/**default password **/
 INSERT INTO oauth.users (username,password,enabled) VALUES
 ('admin','$2a$10$qHHF.ZZeLpa24B8XqN5CKeIjBErPzBUieWGr5fW86jqdCnd0jHIE2',1),
 ('user','$2a$10$qHHF.ZZeLpa24B8XqN5CKeIjBErPzBUieWGr5fW86jqdCnd0jHIE2',1),
