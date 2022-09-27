@@ -1,4 +1,4 @@
-package com.example.aop.controller;
+package com.example.controller;
 
 
 import com.example.starter.service.SayHiService;

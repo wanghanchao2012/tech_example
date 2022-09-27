@@ -24,6 +24,12 @@
 			<groupId>com.example</groupId>
 			<artifactId>05-example-custom-springboot-starter</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.example</groupId>
+			<artifactId>05-example-custom-springboot-starter</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 	
 	<build>
