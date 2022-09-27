@@ -32,7 +32,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .and()
                 .authorizeRequests()
 //                    .antMatchers("/product/**").access("#oauth2.hasScope('select') and hasRole('ROLE_USER')")
-                .antMatchers("/private/**").authenticated();//配置访问控制，必须认证过后才可以访问
+                .antMatchers("/private/**")
+                .authenticated();//配置访问控制，必须认证过后才可以访问
         // @formatter:on
     }
 }

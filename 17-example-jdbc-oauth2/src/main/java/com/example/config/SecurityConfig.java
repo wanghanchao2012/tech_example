@@ -23,30 +23,6 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
-    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-
-    @Bean(name = "userDetailsService")
-    @Override
-    protected UserDetailsService userDetailsService() {
-        return createUserDetailsService();
-    }
-
-    private UserDetailsService createUserDetailsService() {
-        List<Users> query = namedParameterJdbcTemplate.query("select * from users ", new BeanPropertyRowMapper
-                <>(Users.class));
-
-        List<UserDetails> users = new ArrayList<>();
-        query.forEach(record -> {
-            /**
-             * 利用passwordEncoder().encode(record.getPassword())来生成密码密闻存于数据库
-             */
-            String password = record.getPassword();
-            UserDetails userDetails = User.withUsername(record.getUsername()).password(password).authorities("ADMIN", "USER").build();
-            users.add(userDetails);
-        });
-        return new InMemoryUserDetailsManager(users);
-    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

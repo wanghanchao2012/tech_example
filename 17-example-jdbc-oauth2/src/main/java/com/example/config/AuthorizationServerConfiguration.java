@@ -27,7 +27,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     DataSource dataSource;
     @Autowired
     PasswordEncoder passwordEncoder;
-
+   
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.jdbc(dataSource).passwordEncoder(passwordEncoder);
@@ -38,6 +38,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         endpoints
                 .tokenStore(new RedisTokenStore(redisConnectionFactory))
                 .authenticationManager(authenticationManager);
+        ;
     }
 
     @Override
