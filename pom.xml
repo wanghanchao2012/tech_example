@@ -13,6 +13,12 @@
 	<name>tech_example</name>
 	<description>Tech_Example project for Spring Boot</description>
 	<packaging>pom</packaging>
+	
+	
+	<modules>
+		<module>05-example-custom-springboot-starter</module>
+		<module>05-example-spring-boot-starter-cli</module>
+	</modules>
 	<properties>
 		<java.version>1.8</java.version>
 		<springboot-version>2.2.5.RELEASE</springboot-version>

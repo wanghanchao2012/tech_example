@@ -8,9 +8,9 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>api-encryption</artifactId>
+	<artifactId>04-example-api-encryption</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>api-encryption</name>
+	<name>04-example-api-encryption</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>

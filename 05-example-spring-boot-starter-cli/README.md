@@ -1,0 +1,3 @@
+本module实例中，在application.properties中配置的中文读取时会出现乱码，因为程序默认读取的代码中固定写死了编码方式，需要新建properties文件（本例用该方式）或者重写来解决PropertiesPropertySourceLoader
+
+reference：https://blog.csdn.net/chenfei2341/article/details/98854474

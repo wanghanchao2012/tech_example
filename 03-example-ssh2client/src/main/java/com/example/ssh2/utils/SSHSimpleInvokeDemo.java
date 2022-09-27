@@ -15,7 +15,7 @@ public class SSHSimpleInvokeDemo {
 
         String hostname = "10.240.23.112";
         String username = "root";
-        String password = "zhengda@1";
+        String password = "111";
 
         // 基本流程
         // 1. 创建连接对象
