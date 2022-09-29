@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?><!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.UserMapper">
+	<select id="getUser" resultType="com.example.model.User">  
+ 		 select * from users where username=#{username} and enabled = #{enabled}
+	</select>
+	<delete id="deleteUser" parameterType="java.lang.String">
+    	 delete from users where username=#{username}
+ 	</delete>
+	<update id="updateUser" parameterType="com.example.model.User">  
+      	 update users set enabled = #{enabled} where username = #{username}
+	</update>
+	<insert id="insertUser" parameterType="com.example.model.User">
+        insert into users (username,password,enabled) values (#{username},#{password},#{enabled})
+	</insert>
+</mapper>
