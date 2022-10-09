@@ -22,10 +22,9 @@ public class JwtTokenUtil {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
                     .withClaim("username", user.getUsername())
-                    .withClaim("password", user.getPassword())
                     .withClaim("name", user.getName())
                     .withClaim("id", user.getId())
-                    .withClaim("appid", user.getId())
+                    .withClaim("appId", user.getAppId())
                     .withClaim("loginTime", System.currentTimeMillis())
                     .sign(algorithm);
             return token;

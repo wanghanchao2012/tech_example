@@ -33,13 +33,14 @@ public class RequestUtils {
         }
         Map<String, Object> paramMap = JwtTokenUtil.verityAsMap(token);
         long loginTime = NumberUtil.parseLong(paramMap.get("loginTime").toString());
-        String username = paramMap.get("username").toString();
-        String name = paramMap.get("name").toString();
-        String id = paramMap.get("id").toString();
+        //String username = String.valueOf(paramMap.get("username"));
+        //String name = String.valueOf(paramMap.get("name"));
+        //String id = String.valueOf(paramMap.get("id"));
+        String appId = String.valueOf(paramMap.get("appId"));
         if (isExpired(loginTime)) {
             return ApiResp.failed("token过期");
         }
-        if (!Objects.equals(username, casAppInfo.getAppId())) {
+        if (!Objects.equals(appId, casAppInfo.getAppId())) {
             return ApiResp.failed("appId不匹配");
         }
         return ApiResp.success();
@@ -58,7 +59,7 @@ public class RequestUtils {
     }
 
     public static boolean isExpired(String token) {
-        if (StringUtils.isEmpty(token)) {
+        if (StrUtil.isEmpty(token)) {
             return true;
         }
         Map<String, Object> paramMap = JwtTokenUtil.verityAsMap(token);

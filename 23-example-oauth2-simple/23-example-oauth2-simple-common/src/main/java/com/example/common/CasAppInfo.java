@@ -11,10 +11,10 @@ import org.springframework.stereotype.Component;
 @ToString
 @Component
 public class CasAppInfo {
-    @Value("${sso.app.secret}")
+    @Value("${sso.app.secret:''}")
     private String appSecret;
-    @Value("${sso.server.url}")
+    @Value("${sso.server.url:''}")
     private String serverUrl;
-    @Value("${sso.app.id}")
+    @Value("${sso.app.id:''}")
     private String appId;
 }
