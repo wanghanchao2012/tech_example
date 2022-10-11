@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>tech_example</artifactId>
+		<groupId>com.example</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<packaging>pom</packaging>
+	<artifactId>23-example-cas-simple</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+	<modules>
+		<module>23-example-cas-simple-common</module>
+		<module>23-example-cas-simple-server</module>
+		<module>23-example-cas-simple-client</module>
+		<module>23-example-cas-simple-demo</module>
+	</modules>
+
+
+</project>
