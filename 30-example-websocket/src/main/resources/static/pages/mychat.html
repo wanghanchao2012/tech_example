@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>即时通讯</title>
+
+    <script>
+        var socket = null;
+        var uid = uuid();
+        window.onload = function () {
+            document.getElementById("username").innerText = uid;
+            var domMsg = document.getElementById("msg");
+            socket = new WebSocket("ws://127.0.0.1:8080/websocket/" + uid);
+            socket.onclose = function () {
+                socket = null;
+                alert("会话结束...");
+            }
+            socket.onerror = function () {
+                alert("聊天室奔溃...");
+            }
+            socket.onopen = function () {
+                domMsg.innerHTML = "欢迎进入聊天室...";
+            }
+            socket.onmessage = function (message) {
+                console.info(message)
+                domMsg.innerHTML = domMsg.innerHTML + "</BR>" + message.data;
+            }
+        }
+
+        function send() {
+            var sendMsg = document.getElementById("sendMsg").value;
+            console.info("msg:" + sendMsg)
+            socket.send(uid + ":" + sendMsg);
+        }
+
+        function uuid() {
+            var s = [];
+            var hexDigits = "0123456789abcdef";
+            for (var i = 0; i < 36; i++) {
+                s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+            }
+            s[14] = "4"; // bits 12-15 of the time_hi_and_version field to 0010
+            s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1); // bits 6-7 of the clock_seq_hi_and_reserved to 01
+            s[8] = s[13] = s[18] = s[23] = "-";
+
+            var uuid = s.join("");
+            return uuid;
+        }
+    </script>
+</head>
+<body>
+</body>
+<div id="username"></div>
+<div id="msg" style="width: 500px;height: 450px; border:3px solid #00F ; ">
+
+</div>
+<textarea id="sendMsg" style="width: 490px;height: 50px;border:3px solid gainsboro; "></textarea>
+<button onclick="send()">发送</button>
+</html>
