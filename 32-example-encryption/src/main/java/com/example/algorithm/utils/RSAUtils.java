@@ -1,4 +1,4 @@
-package com.example.utils;
+package com.example.algorithm.utils;
 
 
 import javax.crypto.Cipher;

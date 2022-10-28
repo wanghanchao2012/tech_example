@@ -1,7 +1,6 @@
 package com.example.algorithm;
 
-
-import com.example.utils.RSAUtils;
+import com.example.algorithm.utils.*;
 
 import java.security.Key;
 import java.security.interfaces.RSAPrivateKey;
