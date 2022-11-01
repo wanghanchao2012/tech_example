@@ -28,13 +28,13 @@ public class DbHelper<T> {
     static {
         Properties properties = new Properties();
         InputStream resourceAsStream =
-                DbHelper.class.getResourceAsStream("/application.properties");
+                DbHelper.class.getResourceAsStream("/jdbc.properties");
         try {
             properties.load(resourceAsStream);
-            JDBC_DRIVER = properties.getProperty("jdbc.driver");
-            DB_URL = properties.getProperty("jdbc.db.url");
-            USER = properties.getProperty("jdbc.user");
-            PASS = properties.getProperty("jdbc.pass");
+            JDBC_DRIVER = properties.getProperty("driverClassName");
+            DB_URL = properties.getProperty("url");
+            USER = properties.getProperty("username");
+            PASS = properties.getProperty("password");
         } catch (IOException ioe) {
             ioe.printStackTrace();
         } finally {
