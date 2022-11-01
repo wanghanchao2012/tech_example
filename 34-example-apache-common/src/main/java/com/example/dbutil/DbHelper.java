@@ -8,25 +8,48 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapListHandler;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 @Data
 public class DbHelper<T> {
-    // JDBC driver name and database URL
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost:3306/test";
+    static String JDBC_DRIVER = null;
+    static String DB_URL = null;
+    static String USER = null;
+    static String PASS = null;
 
-    // Database credentials
-    static final String USER = "root";
-    static final String PASS = "111111";
+    static {
+        Properties properties = new Properties();
+        InputStream resourceAsStream =
+                DbHelper.class.getResourceAsStream("/application.properties");
+        try {
+            properties.load(resourceAsStream);
+            JDBC_DRIVER = properties.getProperty("jdbc.driver");
+            DB_URL = properties.getProperty("jdbc.db.url");
+            USER = properties.getProperty("jdbc.user");
+            PASS = properties.getProperty("jdbc.pass");
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } finally {
+            try {
+                resourceAsStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 
     public static Connection getConnection() {
+
+
         Connection conn = null;
 
         //Step 1: Register JDBC driver
